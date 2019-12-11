@@ -1,0 +1,24 @@
+<div id="mainContainer">
+  <div id="editorSideBar" class="expanded">
+    <app-editor
+      (optimizeStart)="onOptimizeStart()"
+      (optimizeProgress)="onOptimizeProgress($event)"
+      (optimizeFinish)="onOptimizeFinish($event)"
+      (optimizeError)="onOptimizeError($event)">
+    </app-editor>
+  </div>
+  <div id="resultSide">
+    <h2 id="message" *ngIf="!optimizing">{{ message }}</h2>
+    <div id="optimizing" *ngIf="optimizing">
+      <h2>Optimizing...</h2>
+      <div id="progress">
+        <div id="progressBar" [style.width]="progress + '%'"></div>
+        <span id="progressText">{{ progress }}%</span>
+      </div>
+    </div>
+    <app-results [results]="optimizerResults" *ngIf="optimizerResults !== null">
+    </app-results>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
